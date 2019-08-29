@@ -1,18 +1,7 @@
-pub fn fizz(x: i64) -> String {
-    return is_zero_modulo(x, 3, "Fizz".to_string());
-}
+extern crate fizzbuzz_calc;
 
-pub fn buzz(x: i64) -> String {
-    return is_zero_modulo(x, 5, "Buzz".to_string());
-}
-
-fn is_zero_modulo(x: i64, y: i64, ret: String) -> String {
-    if x % y == 0 {
-        return ret;
-    } else {
-        return "".to_string();
-    }
-}
+use fizzbuzz_calc::fizz;
+use fizzbuzz_calc::buzz;
 
 #[test]
 fn fizz_works_3() {
