@@ -39,7 +39,7 @@ fn main() {
             }
             println!("{}", ret);
         } else {
-            println!("{} is not u64 number.", _line_trim);
+            println!("{} is not i64 number.", _line_trim);
         }
     }
 }
