@@ -24,10 +24,10 @@ fn main() {
             break;
         }
 
-        let r_number: Result<i64, ParseIntError> = _line_trim.parse::<i64>();
+        let r_number: Result<u64, ParseIntError> = _line_trim.parse::<u64>();
 
         if r_number.is_ok() {
-            let number: i64 = r_number.unwrap();
+            let number: u64 = r_number.unwrap();
             println!("Number is {}.", number);
             let ret: String;
             if number >= 1 {
@@ -39,7 +39,7 @@ fn main() {
             }
             println!("{}", ret);
         } else {
-            println!("{} is not i64 number.", _line_trim);
+            println!("{} is not u64 number.", _line_trim);
         }
     }
 }
