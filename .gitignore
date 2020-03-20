@@ -2,4 +2,4 @@
 **/*.rs.bk
 *.log
 ./vscode
-.rustc_info.json
+*.json
