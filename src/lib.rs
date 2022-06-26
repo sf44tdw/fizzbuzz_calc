@@ -1,6 +1,14 @@
-extern crate failure;
+use std::io::{Error, ErrorKind};
+use thiserror::Error;
 
-use failure::*;
+#[derive(Debug, Error)]
+enum MyError {
+    #[error("ZeroDev: {0}")]
+    ZeroDev(String),
+    #[error("NotStart1: {0}")]
+    NotStart1(String),
+}
+
 /// 渡された数値が3の倍数であれば"Fizz"を返す。
 /// それ以外の場合は空文字列を返す。
 ///
@@ -42,9 +50,13 @@ fn is_zero_modulo_without_zero_dividend(
     b: u64,
     return_if_mod_is_zero_message: String,
     return_if_mod_is_not_zero_message: String,
-) -> Result<String, failure::Error> {
+) -> Result<String, std::io::Error> {
     if a == 0 {
-        return Err(format_err!("a:{} b:{} FizzBuzz start 1.", a, b));
+        let custom_error: std::io::Error = Error::new(
+            ErrorKind::InvalidData,
+            MyError::NotStart1(format!("a:{} b:{} FizzBuzz start 1.", a, b)),
+        );
+        return Err(custom_error);
     }
     return is_zero_modulo(
         a,
@@ -67,9 +79,13 @@ fn is_zero_modulo(
     b: u64,
     return_if_mod_is_zero_message: String,
     return_if_mod_is_not_zero_message: String,
-) -> Result<String, failure::Error> {
+) -> Result<String, std::io::Error> {
     if b == 0 {
-        return Err(format_err!("a:{} b:{} Can not execute a mod b.", a, b));
+        let custom_error: std::io::Error = Error::new(
+            ErrorKind::InvalidData,
+            MyError::ZeroDev(format!("a:{} b:{} Can not execute a mod b.", a, b)),
+        );
+        return Err(custom_error);
     }
     let answer_mod: u64 = a % b;
     if answer_mod == 0 {
